@@ -3,9 +3,6 @@
 # Core's dependencies are managed with Composer.
 /vendor
 
-
-
-
 .htaccess
 .DS_Store
 .vscode

@@ -1,0 +1,1 @@
+make drush "sql:dump --result-file=../mariadb-init/sqldump.sql"
