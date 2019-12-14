@@ -1,0 +1,16 @@
+
+
+# Core's dependencies are managed with Composer.
+/vendor
+
+
+
+
+.htaccess
+.DS_Store
+.vscode
+
+node_modules
+
+db
+.docker-sync
