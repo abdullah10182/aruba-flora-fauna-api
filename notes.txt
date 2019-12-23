@@ -1,1 +1,25 @@
 make drush "sql:dump --result-file=../mariadb-init/sqldump.sql"
+make drush "cex -y"
+
+Spiecies Fields
+- Title / Common name
+- Papiamento name
+- Scientific/ latin name
+- Category: 
+    - Succelent plants
+    - Shrubs/small trees
+    - Herbs
+    - Grasses
+    - Vines
+    - Mangroves
+    - Terrestial trees
+- Family:
+- Description
+- Link
+- Protected Locally
+- Origin:
+    - Introduced/ Exotic
+    - Invasive
+    - Native
+    - Endemic Aruba
+    - Endemic ABC islands
