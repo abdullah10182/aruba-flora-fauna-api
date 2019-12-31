@@ -1,0 +1,232 @@
+<?php
+
+/**
+ * @file
+ * Contains aff_api.module.
+ */
+
+use  Drupal\user\Entity\User;
+use \Drupal\user\UserInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+
+//functions
+$functions = drupal_get_path('module', 'aff_api') . '/src/Helpers/functions.php';
+require $functions;
+
+function aff_api_preprocess_page(&$variables,&$page) {
+  $path = \Drupal::request()->getpathInfo();
+  if(strpos($path, '/tours-administration') !== false && \Drupal::currentUser()->isAnonymous()){
+    header("Location: /user/login?destination=" . $path);
+    exit();
+  } 
+
+  $currentUser = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  $userRoleAllowed = ($currentUser->hasRole('tour_admin') || $currentUser->hasRole('administrator'));
+  if(strpos($path, '/tours-administration') !== false && !$userRoleAllowed) {
+    $response = new RedirectResponse('/');
+    $response->send();
+    exit();
+  }
+}
+
+function aff_api_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+  switch ($key) {
+    case 'registration_status_changed':
+       $message['headers'] = array(
+       'MIME-Version' => '1.0',
+       'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+       'Content-Transfer-Encoding' => '8Bit',
+       'X-Mailer' => 'Drupal'
+       );
+      $message['from'] = 'no-reply@webaruba.com';
+      $message['subject'] = t($params['subject'], $options);
+      $message['body'][] = $params['body'];
+      break;
+  }
+}
+
+function aff_api_user_presave(UserInterface $user) {
+  //delete all orders clean up by opening current user and saving it
+  // run this query on the data base: ALTER TABLE `tour_registrations` AUTO_INCREMENT=1
+  // $controller = \Drupal::entityTypeManager()->getStorage('tour_registrations');
+  // $entities = $controller->loadMultiple();
+  // $controller->delete($entities);
+}
+
+function aff_api_template_preprocess_default_variables_alter(&$variables){
+  $currentUser = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  $userEmail = $currentUser->get('mail')->value;
+  //$userName = $currentUser->get('field_name')->value . ' ' . $currentUser->get('field_last_name')->value;
+
+  //paths
+  $path = \Drupal::request()->getpathInfo(); 
+  $raw_path = \Drupal::service('path.current')->getPath();
+  $variables['this_path']= $path;
+  $variables['base_path'] = base_path();
+  $variables['theme_path'] = 'themes/weblab';
+  $variables['raw_path'] = $raw_path;
+
+  $variables['#attached'] = [
+    'drupalSettings' => [
+      'myLibrary' => [
+        'user_email' => $userEmail,
+        'language' => $variables['language'],
+        'isTourAdmin'=> $currentUser->hasRole('tour_admin'),
+        'path' => $path
+      ],
+    ],
+  ];
+
+  //test
+
+  //dpm($variables);
+  //$variables['current_user_name'] = $userName;
+
+  //$variables['node_vars'] = getNodePageVariables();
+}
+
+function aff_api_toolbar() {
+  $items = [];
+
+  $items['aff_api'] = [
+    '#cache' => [
+        'contexts' => ['user.permissions'],
+    ],
+  ];
+
+  $hasTourAdminRole = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id())->hasRole('tour_admin');
+  if (!$hasTourAdminRole) {
+      return $items;
+  }
+
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $createUrl = 'internal:/company/plant-tours';
+  if($langcode !='en')
+    $createUrl = 'internal:/pap/compania/tours';
+
+  $items['aff_api'] = [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'link',
+      '#title' => t('Tour Admin'),
+      '#url' => Url::fromRoute('<front>'),
+      '#attributes' => array(
+        'class' => array('toolbar-icon', 'toolbar-icon-bus'),
+        'aria-pressed' => 'false',
+      ),
+    ],
+    'tray' => [
+      '#heading' => t('Test tray'),
+      '#wrapper_attributes' => [
+        'id' => 'toolbar-tray-testing',
+      ],
+      'content' => [
+        '#theme' => 'item_list',
+        '#items' => [
+          [
+              '#type' => 'link',
+              '#title' => 'Create Tour',
+              '#url' => \Drupal\Core\Url::fromUri($createUrl),
+          ],
+          [
+              '#type' => 'link',
+              '#title' => 'Registrations Calendar',
+              '#url' => \Drupal\Core\Url::fromUri("internal:/tours-administration"),
+
+          ],
+          [
+              '#type' => 'link',
+              '#title' => 'Registrations List',
+              '#url' => \Drupal\Core\Url::fromUri("internal:/admin/tours-registrations"),
+          ],
+          [
+              '#type' => 'link',
+              '#title' => 'Tour Types',
+              '#url' => \Drupal\Core\Url::fromUri("internal:/admin/tour-types"),
+
+          ],
+          [
+              '#type' => 'link',
+              '#title' => 'Settings',
+              '#url' => \Drupal\Core\Url::fromUri("internal:/tours/5/edit?destination=/company/plant-tours"),
+
+          ],
+        ],
+        '#attributes' => [
+          'class' => ['toolbar-menu'],
+        ],
+      ],
+    ],
+    '#weight' => -11,
+  ];
+
+  return $items;
+}
+
+function aff_api_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'aff_api/main-css-module';
+}
+
+function getNodePageVariables(){
+  $custom_node_vars = [];
+
+  if(!\Drupal::routeMatch()->getParameter('node') || 
+    \Drupal::routeMatch()->getParameter('node')->getType() != 'content_page') {
+    return;
+  }
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  //dpm($node->field_sidebar_blocks->getValue());
+
+  //check to activate side menu area
+  if($node->field_add_sidebar_menu->value)
+  $custom_node_vars['side_menu_active'] = true;
+  else $custom_node_vars['side_menu_active'] = false;
+
+  //catergory page
+  if($node->field_category->target_id ){
+    $custom_node_vars['category_id'] = $node->field_category->target_id;
+    $cid = $custom_node_vars['category_id'];
+  }
+
+  return $custom_node_vars;
+}
+
+function aff_api_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case "tour_registrations_submissions_delete_form":
+      $form['#validate'][] = '_agenda_delete_validation';
+      break;
+  }
+}
+
+function _agenda_delete_validation(&$form, FormStateInterface $form_state) {
+
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    $path = "/company/plant-tours";     
+    foreach ($roles as $key => $value) {
+      if($value == 'administrator'){
+        return;
+      }
+    }
+    $form_state->setError($form, 'You do not have permission to delete this entity.' );
+    $response = new RedirectResponse($path);
+    $response->send();
+}
+
+// function aff_api_preprocess_block__webform_custom_request(&$variables){
+
+// }

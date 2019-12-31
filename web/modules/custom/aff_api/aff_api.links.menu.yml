@@ -1,0 +1,5 @@
+# weblab_dashbaord.admin_item_1:
+#   title: 'New Admin Item 1'
+#   parent: system.admin
+#   description: 'Description of link goes here.'
+#   route_name: aff_api.dashboard_admin

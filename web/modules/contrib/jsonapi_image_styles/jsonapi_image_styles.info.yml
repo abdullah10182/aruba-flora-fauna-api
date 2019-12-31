@@ -1,0 +1,12 @@
+name: 'JSON:API image styles'
+type: module
+description: 'Expose image styles to JSON:API'
+core: 8.x
+package: 'Web services'
+dependencies:
+  - drupal:jsonapi
+
+# Information added by Drupal.org packaging script on 2019-09-12
+version: '8.x-1.0-beta1'
+project: 'jsonapi_image_styles'
+datestamp: 1568319490

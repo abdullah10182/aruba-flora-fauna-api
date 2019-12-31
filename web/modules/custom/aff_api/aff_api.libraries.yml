@@ -1,0 +1,9 @@
+main-bundle-app:
+  js:
+    vue-app/build/app.bundle.js: {}
+    https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit: {type: external}
+
+main-css-module:
+  css:
+    component:
+      assets/css/main.css: {}
