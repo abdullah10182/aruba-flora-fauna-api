@@ -1,0 +1,17 @@
+uuid: 257f0eb6-d307-4afb-b8ba-0f57a7f7db6d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Flora
+type: flora
+description: 'Plant based species'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

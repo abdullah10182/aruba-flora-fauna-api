@@ -1,0 +1,40 @@
+uuid: 21a59f0d-ddd1-4197-876d-de042650e1f1
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.flora.field_additional_images
+    - field.field.node.flora.field_category
+    - field.field.node.flora.field_description
+    - field.field.node.flora.field_description_short
+    - field.field.node.flora.field_family
+    - field.field.node.flora.field_main_image
+    - field.field.node.flora.field_more_info_link
+    - field.field.node.flora.field_papiamento_name
+    - field.field.node.flora.field_protected_locally
+    - field.field.node.flora.field_scientific_name
+    - node.type.flora
+  module:
+    - user
+id: node.flora.teaser
+targetEntityType: node
+bundle: flora
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_additional_images: true
+  field_category: true
+  field_description: true
+  field_description_short: true
+  field_family: true
+  field_main_image: true
+  field_more_info_link: true
+  field_papiamento_name: true
+  field_protected_locally: true
+  field_scientific_name: true

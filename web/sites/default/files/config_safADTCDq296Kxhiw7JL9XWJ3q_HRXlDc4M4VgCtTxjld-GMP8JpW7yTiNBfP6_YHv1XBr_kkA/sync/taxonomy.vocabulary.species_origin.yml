@@ -1,0 +1,8 @@
+uuid: 94ba40eb-3b89-4f42-b0f0-3fd42dba062c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Species Origin'
+vid: species_origin
+description: ''
+weight: 0

@@ -1,0 +1,29 @@
+uuid: 0b4dbd8d-def1-4daf-a0bc-4e53fdd82086
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_family
+    - node.type.flora
+    - taxonomy.vocabulary.flora_family
+id: node.flora.field_family
+field_name: field_family
+entity_type: node
+bundle: flora
+label: Family
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      flora_family: flora_family
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

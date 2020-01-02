@@ -1,0 +1,8 @@
+uuid: d05ead55-23d5-4554-8c80-b7a487d3c3f9
+langcode: en
+status: true
+dependencies: {  }
+name: 'Flora Simple Category'
+vid: flora_simple_category
+description: ''
+weight: 0

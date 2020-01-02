@@ -1,0 +1,12 @@
+uuid: f4efbaae-de9a-421e-8882-a4461726f95c
+langcode: en
+status: true
+dependencies: {  }
+label: 'Thumbnail Crop'
+id: thumbnail_crop
+description: ''
+aspect_ratio: '1:1'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

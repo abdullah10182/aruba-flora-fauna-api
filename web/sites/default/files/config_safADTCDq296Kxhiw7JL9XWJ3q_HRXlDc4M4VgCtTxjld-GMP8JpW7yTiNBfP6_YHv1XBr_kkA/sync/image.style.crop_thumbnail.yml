@@ -1,0 +1,27 @@
+uuid: f1f79301-ed66-454e-a55c-f989df498ec3
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.thumbnail_crop
+  module:
+    - crop
+_core:
+  default_config_hash: N1S0PHZeyxfFqgzB-sDeGPaxi0dDOL8NUiP_d6WXSV0
+name: crop_thumbnail
+label: 'Crop thumbnail (480x480)'
+effects:
+  8fc26706-68dc-4eb7-8121-33e3936ed55f:
+    uuid: 8fc26706-68dc-4eb7-8121-33e3936ed55f
+    id: image_scale
+    weight: -9
+    data:
+      width: 480
+      height: null
+      upscale: false
+  85bba31a-dfa1-4c5a-b592-694d00b8eb68:
+    uuid: 85bba31a-dfa1-4c5a-b592-694d00b8eb68
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: thumbnail_crop

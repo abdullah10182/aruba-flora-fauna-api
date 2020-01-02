@@ -1,0 +1,19 @@
+uuid: 8d2d374f-8ef8-4aba-9461-e31e3f715d5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_papiamento_name
+    - node.type.flora
+id: node.flora.field_papiamento_name
+field_name: field_papiamento_name
+entity_type: node
+bundle: flora
+label: 'Papiamento Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

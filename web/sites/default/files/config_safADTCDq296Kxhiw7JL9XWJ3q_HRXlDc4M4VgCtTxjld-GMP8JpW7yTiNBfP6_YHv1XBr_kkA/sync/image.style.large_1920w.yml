@@ -1,0 +1,15 @@
+uuid: 8b747faf-e4d2-45e2-b556-de32cdc4abbe
+langcode: en
+status: true
+dependencies: {  }
+name: large_1920w
+label: 'Large (1920 x auto)'
+effects:
+  76809ad7-72e3-4da9-8fda-f433c2af0690:
+    uuid: 76809ad7-72e3-4da9-8fda-f433c2af0690
+    id: image_scale
+    weight: 1
+    data:
+      width: 1920
+      height: null
+      upscale: false

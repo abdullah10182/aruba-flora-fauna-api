@@ -1,0 +1,21 @@
+uuid: 7f35fd09-8331-4933-8255-bc951409ac7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.flora
+  module:
+    - text
+id: node.flora.field_description
+field_name: field_description
+entity_type: node
+bundle: flora
+label: Description
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

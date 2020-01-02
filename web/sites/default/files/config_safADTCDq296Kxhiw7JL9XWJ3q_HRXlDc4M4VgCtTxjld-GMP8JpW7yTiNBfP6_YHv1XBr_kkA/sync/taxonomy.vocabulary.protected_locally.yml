@@ -1,0 +1,8 @@
+uuid: 94801e28-ede6-4998-9414-f63a14281179
+langcode: en
+status: true
+dependencies: {  }
+name: 'Protected Locally'
+vid: protected_locally
+description: ''
+weight: 0

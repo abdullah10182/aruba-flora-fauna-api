@@ -1,0 +1,418 @@
+uuid: d180bbef-ee0a-44ec-a53c-06f35135800f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.basic
+    - field.field.node.flora.field_additional_images
+    - field.field.node.flora.field_category
+    - field.field.node.flora.field_description
+    - field.field.node.flora.field_description_short
+    - field.field.node.flora.field_family
+    - field.field.node.flora.field_main_image
+    - field.field.node.flora.field_more_info_link
+    - field.field.node.flora.field_papiamento_name
+    - field.field.node.flora.field_protected_locally
+    - field.field.node.flora.field_scientific_name
+    - image.style.large
+    - node.type.flora
+  module:
+    - image
+    - layout_builder
+    - layout_discovery
+    - link
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 67-33
+        components:
+          bab35b78-237a-4d99-b292-97af17f39bad:
+            uuid: bab35b78-237a-4d99-b292-97af17f39bad
+            region: first
+            configuration:
+              id: 'field_block:node:flora:field_papiamento_name'
+              label: 'Papiamento Name'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          5d65e0d8-ce22-4076-aad9-198bb61da843:
+            uuid: 5d65e0d8-ce22-4076-aad9-198bb61da843
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:flora:field_scientific_name'
+              formatter:
+                label: above
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+                type: string
+            additional: {  }
+            weight: 0
+          d4a3fb6e-ab80-4448-a51a-c442498d3bd6:
+            uuid: d4a3fb6e-ab80-4448-a51a-c442498d3bd6
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_category'
+              label: Category
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 1
+          6e0a0df6-009d-4a8b-87f3-3718f010b67b:
+            uuid: 6e0a0df6-009d-4a8b-87f3-3718f010b67b
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_family'
+              label: Family
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          02059b40-d56c-4640-9dc3-45ebcc9c6e6a:
+            uuid: 02059b40-d56c-4640-9dc3-45ebcc9c6e6a
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_protected_locally'
+              label: 'Protected Locally'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          2c8c9536-51e3-44d0-a955-3c23b20b57be:
+            uuid: 2c8c9536-51e3-44d0-a955-3c23b20b57be
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_more_info_link'
+              label: 'More Info Link'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: link
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          1858c4d3-7484-4c67-9cae-d843616fb3ba:
+            uuid: 1858c4d3-7484-4c67-9cae-d843616fb3ba
+            region: first
+            configuration:
+              id: 'field_block:node:flora:field_description_short'
+              label: 'Description Short'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: basic_string
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+          74e6d0b1-f535-4588-a1f6-4efa96a3ebc9:
+            uuid: 74e6d0b1-f535-4588-a1f6-4efa96a3ebc9
+            region: first
+            configuration:
+              id: 'field_block:node:flora:field_description'
+              label: Description
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          93d5726a-6816-4f83-9bcc-2fd6d89db949:
+            uuid: 93d5726a-6816-4f83-9bcc-2fd6d89db949
+            region: content
+            configuration:
+              id: 'inline_block:basic'
+              label: line
+              provider: layout_builder
+              label_display: '0'
+              view_mode: full
+              block_revision_id: 1
+              block_serialized: null
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 50-50
+        components:
+          de7176e4-8895-4a35-8f81-3cb5e6e7903a:
+            uuid: de7176e4-8895-4a35-8f81-3cb5e6e7903a
+            region: first
+            configuration:
+              id: 'field_block:node:flora:field_main_image'
+              label: 'Main Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: large
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          343db712-6ae1-48cc-a155-1f0828d89b48:
+            uuid: 343db712-6ae1-48cc-a155-1f0828d89b48
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_main_image'
+              label: 'Main Image Cropped'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: crop_thumbnail
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          9a9f1ddd-42d3-46ae-ba48-da0f6cd29b7f:
+            uuid: 9a9f1ddd-42d3-46ae-ba48-da0f6cd29b7f
+            region: content
+            configuration:
+              id: 'inline_block:basic'
+              label: line
+              provider: layout_builder
+              label_display: '0'
+              view_mode: full
+              block_revision_id: 2
+              block_serialized: null
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          column_widths: 50-50
+        components:
+          7c04ce37-5209-4695-8bbc-5dbc06edff75:
+            uuid: 7c04ce37-5209-4695-8bbc-5dbc06edff75
+            region: first
+            configuration:
+              id: 'field_block:node:flora:field_additional_images'
+              label: 'Additional Images'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: large
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          ee7f0ef5-fa8b-407d-89d4-c34723bb25dc:
+            uuid: ee7f0ef5-fa8b-407d-89d4-c34723bb25dc
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_additional_images'
+              label: 'Additional Images Cropped'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: crop_thumbnail
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+id: node.flora.default
+targetEntityType: node
+bundle: flora
+mode: default
+content:
+  field_additional_images:
+    weight: 111
+    label: above
+    settings:
+      image_style: large
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_category:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_description:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_description_short:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_family:
+    weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_main_image:
+    weight: 110
+    label: above
+    settings:
+      image_style: large
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_more_info_link:
+    weight: 108
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_papiamento_name:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_protected_locally:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_scientific_name:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  layout_builder__layout: true
