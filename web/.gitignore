@@ -16,8 +16,8 @@ sites/*/settings*.php
 sites/*/services*.yml
 
 # Ignore paths that contain user-generated content.
-#sites/*/files
-#sites/*/private
+sites/*/files
+sites/*/private
 
 # Ignore SimpleTest multi-site environment.
 sites/simpletest
@@ -39,7 +39,7 @@ sites/simpletest
 core/phpcs.xml
 core/phpunit.xml
 
-.htaccess
+/.htaccess
 .DS_Store
 .vscode
 

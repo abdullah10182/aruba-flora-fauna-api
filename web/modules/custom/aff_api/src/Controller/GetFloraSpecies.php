@@ -34,15 +34,25 @@ class GetFloraSpecies extends ControllerBase {
 
     foreach ($species['data'] as $plant) {
       $protected_locally = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_protected_locally->target_id);
+      $category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
+      $family = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_family->target_id);
+
+      $main_image = $this->createImageObject($plant->field_main_image);
+      $additional_images = $this->createMainAdditionalImagesObject($plant);
+
       $response_array[] = [
         'id' => $plant->nid->value,
         'common_name' => $plant->title->value,
         'papiamento_name' => $plant->field_papiamento_name->value,
+        'scientific_name' => $plant->field_scientific_name->value,
         'protected_localy' => $protected_locally ? true : false,
-        'category' => \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id)->getName(),
+        'category' => $category ? $category->getName() : null,
+        'family' => $family ? $family->getName() : null,
         'short_description' => $plant->field_description_short->value,
-        //'custom_dates' => $plant->field_more_info_link->getValue()[0]['uri'],
-        'thumbnail' => ImageStyle::load('crop_thumbnail')->buildUrl($plant->field_main_image->entity->getFileUri())
+        'description' => $plant->field_description->value,
+        'more_info_link' => $plant->field_more_info_link->getValue()[0]['uri'],
+        'main_image' => $main_image,
+        'additional_images' => $additional_images
       ];
     }
 
@@ -54,7 +64,7 @@ class GetFloraSpecies extends ControllerBase {
     return $response;
   }
 
-  public function query_flora_species(){
+  public function query_flora_species() {
     $species = [];
     $query = \Drupal::entityQuery('node')
     ->condition('type','flora')
@@ -67,6 +77,33 @@ class GetFloraSpecies extends ControllerBase {
   
     return $species;
     
+  }
+
+  public function createImageObject($image_field) {
+    $main_image = new \stdClass();
+    $main_image->main_image_large = ImageStyle::load('large_1920w')->buildUrl($image_field->entity->getFileUri());
+    $main_image->main_image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($image_field->entity->getFileUri());
+    $main_image->title = $image_field->title;
+    return $main_image;
+  }
+
+  public function createMainAdditionalImagesObject($plant) {
+    if(!$plant->field_additional_images->getValue()) {
+      return [];
+    }
+    $additional_images = [];
+    $additional_images_fields = $plant->field_additional_images->getValue();
+
+    foreach ($additional_images_fields as $key => $plant_value) {
+      $file = \Drupal\file\Entity\File::load($plant_value['target_id']);
+      $additional_image = new \stdClass();
+      $additional_image->additional_image_large = ImageStyle::load('large_1920w')->buildUrl($file->getFileUri());
+      $additional_image->additional_image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($file->getFileUri());
+      $additional_image->title = $plant_value['title'];
+      array_push($additional_images, $additional_image);
+    }
+
+    return $additional_images;
   }
 
 }//end class
