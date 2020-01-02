@@ -56,6 +56,7 @@ services:
   nginx:
     image: wodby/nginx:$NGINX_TAG
     container_name: "${PROJECT_NAME}_nginx"
+    mem_limit: -1
     depends_on:
       - php
     environment:
