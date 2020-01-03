@@ -30,12 +30,19 @@ class GetFloraSpecies extends ControllerBase {
   */
   public function get_flora_species( Request $request ) {
     //query function 
-    $species = $this->query_flora_species();
+    $species = $this->query_flora_species($request );
+    $response_array = array();
 
     foreach ($species['data'] as $plant) {
-      $protected_locally = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_protected_locally->target_id);
-      $category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
-      $family = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_family->target_id);
+      $protected_locally = null;
+      $category = null;
+      $family = null;
+      if(isset($plant->field_protected_locally->target_id))
+        $protected_locally = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_protected_locally->target_id);
+      if(isset($plant->field_category->target_id))
+        $category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
+      if(isset($plant->field_category->target_id))
+        $family = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
 
       $main_image = $this->createImageObject($plant->field_main_image);
       $additional_images = $this->createMainAdditionalImagesObject($plant);
@@ -46,11 +53,12 @@ class GetFloraSpecies extends ControllerBase {
         'papiamento_name' => $plant->field_papiamento_name->value,
         'scientific_name' => $plant->field_scientific_name->value,
         'protected_localy' => $protected_locally ? true : false,
-        'category' => $category ? $category->getName() : null,
+        'category_id' => $plant->field_category->target_id,
+        'category_name' => $category ? $category->getName() : null,
         'family' => $family ? $family->getName() : null,
         'short_description' => $plant->field_description_short->value,
         'description' => $plant->field_description->value,
-        'more_info_link' => $plant->field_more_info_link->getValue()[0]['uri'],
+        'more_info_link' => $plant->field_more_info_link->getValue() ? $plant->field_more_info_link->getValue()[0]['uri'] : null,
         'main_image' => $main_image,
         'additional_images' => $additional_images
       ];
@@ -64,19 +72,21 @@ class GetFloraSpecies extends ControllerBase {
     return $response;
   }
 
-  public function query_flora_species() {
+  public function query_flora_species($request) {
     $species = [];
     $query = \Drupal::entityQuery('node')
     ->condition('type','flora')
-    ->condition('status',1);
+    ->condition('status',1)
+    ->sort('title' , 'ASC');
+    $test = $request->get('category') ;
+    if($request->get('category') !== null)
+      $query = $query->condition('field_category', $request->get('category'), '=');
     //$count = $query->count()->execute();
     $ids = $query->execute();
-    global $pager_total_items;
     $species['count'] = count($ids);  
     $species['data'] = \Drupal\node\Entity\Node::loadMultiple($ids);  
   
     return $species;
-    
   }
 
   public function createImageObject($image_field) {

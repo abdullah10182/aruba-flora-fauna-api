@@ -1,145 +1,14 @@
 
-aff_api.get_flora:
+aff_api.get_flora_species:
   path: 'aff-api/flora-species'
   defaults: { _controller: '\Drupal\aff_api\Controller\GetFloraSpecies::get_flora_species' }
   methods:  [GET]
   requirements:
     _access: 'TRUE'
 
-aff_api.get_tour_types:
-  path: 'tours-api/get-tour-types'
-  defaults: { _controller: '\Drupal\aff_api\Controller\GetTourTypes::get_tour_types' }
+aff_api.get_flora_categories:
+  path: 'aff-api/flora-categories'
+  defaults: { _controller: '\Drupal\aff_api\Controller\GetFloraCategories::get_flora_categories' }
   methods:  [GET]
   requirements:
     _access: 'TRUE'
-
-aff_api.get_registrations_calendar:
-  path: 'tours-api/get-registrations-calendar'
-  defaults: { _controller: '\Drupal\aff_api\Controller\GetRegistrationsCalendar::get_registrations_calendar' }
-  methods:  [GET]
-  requirements:
-    _access: 'TRUE'
-
-aff_api.create_registration_post:
-  path: 'tours-api/create-registration'
-  defaults: { _controller: '\Drupal\aff_api\Controller\CreateRegistration::create_registration_post' }
-  methods:  [POST]
-  requirements:
-    _access: 'TRUE'
-    
-aff_api.get_registrations_calendar_admin:
-  path: 'tours-api/get-registrations-calendar-admin'
-  defaults: { _controller: '\Drupal\aff_api\Controller\GetRegistrationsAdminCalendar::get_registrations_calendar_admin' }
-  methods:  [get]
-  requirements:
-    _role: 'administrator + tour_admin'
-
-
-aff_api.get_registrations_admin:
-  path: 'tours-api/get-registrations_admin'
-  defaults: { _controller: '\Drupal\aff_api\Controller\GetRegistrationsAdminCalendar::get_registrations_admin' }
-  methods:  [get]
-  requirements:
-    _role: 'administrator + tour_admin'
-
-aff_api.edit_registration_post:
-  path: 'tours-api/edit-registration'
-  defaults: { _controller: '\Drupal\aff_api\Controller\EditRegistration::edit_registration_post' }
-  methods:  [POST]
-  requirements:
-    _role: 'administrator + tour_admin'
-
-aff_api.delete_registration_post:
-  path: 'tours-api/delete-registration'
-  defaults: { _controller: '\Drupal\aff_api\Controller\DeleteRegistration::delete_registration_post' }
-  methods:  [POST]
-  requirements:
-    _access: 'TRUE'
-
-aff_api.delete_registration_client_post:
-  path: 'tours-api/delete-registration-client'
-  defaults: { _controller: '\Drupal\aff_api\Controller\DeleteRegistrationClient::delete_registration_client_post' }
-  methods:  [POST]
-  requirements:
-    _access: 'TRUE'
-
-aff_api.get_registrations_export_csv:
-  path: 'tours-api/get-registration-export-csv'
-  defaults: { _controller: '\Drupal\aff_api\Controller\GetRegistrationsExportCsv::get_registrations_export_csv' }
-  methods:  [GET]
-  requirements:
-    _role: 'administrator + tour_admin'
-
-aff_api.get_tour_admin_emails:
-  path: 'tours-api/get-tour-admin-emails'
-  defaults: { _controller: '\Drupal\aff_api\Controller\EmailTourAdminCalls::get_tour_admin_emails' }
-  methods:  [GET]
-  requirements:
-    _role: 'administrator + tour_admin'
-
-aff_api.sent_tour_admin_email:
-  path: 'tours-api/sent-tour-admin-email'
-  defaults: { _controller: '\Drupal\aff_api\Controller\EmailTourAdminCalls::sent_tour_admin_email' }
-  methods:  [POST]
-  requirements:
-    _role: 'administrator + tour_admin'
-
-# aff_api.edit_order_post:
-#   path: 'orders-api/edit-order'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\EditOrder::edit_order_post' }
-#   methods:  [POST]
-#   requirements:
-#     _role: 'administrator + client + dashboard_admin'
-
-# aff_api.get_current_orders:
-#   path: 'orders-api/get-current-orders'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\GetOrders::get_current_orders' }
-#   methods:  [GET]
-#   requirements:
-#     _role: 'administrator + client + dashboard_admin'
-
-
-
-# aff_api.get_current_orders_states:
-#   path: 'orders-api/get-current-orders-states'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\GetOrdersStates::get_current_orders_states' }
-#   methods:  [GET]
-#   requirements:
-#     _role: 'administrator + client + dashboard_admin'
-
-# aff_api.get_clients:
-#   path: 'api/clients'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\GetClients::get_clients' }
-#   methods:  [GET]
-#   requirements:
-#     _role: 'administrator + dashboard_admin'
-
-# aff_api.get_dashboard_admins:
-#   path: 'api/get-dashboard-admins'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\GetDashboardAdmins::get_dashboard_admins' }
-#   methods:  [GET]
-#   requirements:
-#     _role: 'administrator + client + dashboard_admin'
-
-# aff_api.get_invoice_data:
-#   path: '/api/get-invoice-data'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\GetInvoiceData::get_invoice_data' }
-#   methods:  [GET]
-#   requirements:
-#     _role: 'administrator + client + dashboard_admin'
-
-# aff_api.get_order_list_export_excel_data:
-#   path: '/api/get-orders-export-excel'
-#   defaults: { _controller: '\Drupal\aff_api\Controller\GetOrderListExportExcelData::get_order_list_export_excel_data' }
-#   methods:  [GET]
-#   requirements:
-#     _role: 'administrator + client + dashboard_admin'
-
-# #example
-# aff_api.dashboard_admin:
-#   path: '/admin/analysis-items-views'
-#   defaults:
-#     _title: 'Devel settings'
-#   requirements:
-#     _permission: 'TRUE'
-
