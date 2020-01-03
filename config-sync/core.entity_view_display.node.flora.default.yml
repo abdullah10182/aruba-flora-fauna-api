@@ -186,22 +186,6 @@ third_party_settings:
                 view_mode: view_mode
             additional: {  }
             weight: 3
-          b577d20c-c32c-4831-bd50-ea470bda4c14:
-            uuid: b577d20c-c32c-4831-bd50-ea470bda4c14
-            region: first
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:flora:field_status'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 4
           b9a58265-3fab-48d8-80b2-88a7181c9ec0:
             uuid: b9a58265-3fab-48d8-80b2-88a7181c9ec0
             region: second
