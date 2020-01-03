@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.flora.field_papiamento_name
     - field.field.node.flora.field_protected_locally
     - field.field.node.flora.field_scientific_name
+    - field.field.node.flora.field_status
     - image.style.large
     - node.type.flora
   module:
@@ -148,7 +149,7 @@ third_party_settings:
                 entity: layout_builder.entity
                 view_mode: view_mode
             additional: {  }
-            weight: 3
+            weight: 4
           1858c4d3-7484-4c67-9cae-d843616fb3ba:
             uuid: 1858c4d3-7484-4c67-9cae-d843616fb3ba
             region: first
@@ -179,6 +180,41 @@ third_party_settings:
                 label: above
                 type: text_default
                 settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 3
+          b577d20c-c32c-4831-bd50-ea470bda4c14:
+            uuid: b577d20c-c32c-4831-bd50-ea470bda4c14
+            region: first
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:flora:field_status'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 4
+          b9a58265-3fab-48d8-80b2-88a7181c9ec0:
+            uuid: b9a58265-3fab-48d8-80b2-88a7181c9ec0
+            region: second
+            configuration:
+              id: 'field_block:node:flora:field_status'
+              label: Status
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: false
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
@@ -409,6 +445,14 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_status:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: first
   links:
     weight: 100
     region: content

@@ -1,0 +1,110 @@
+uuid: 83fff9ec-49fa-49f4-9c92-43e59091989a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.flora_simple_category.field_category_image
+    - taxonomy.vocabulary.flora_simple_category
+  module:
+    - image
+    - layout_builder
+    - layout_discovery
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          c8e9e5fe-ad53-4ddd-b048-8d6223adec4a:
+            uuid: c8e9e5fe-ad53-4ddd-b048-8d6223adec4a
+            region: content
+            configuration:
+              id: 'field_block:taxonomy_term:flora_simple_category:description'
+              label: Description
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: Image
+          column_widths: 50-50
+        components:
+          e806fb8b-0f1c-4e82-b721-ce16312bb822:
+            uuid: e806fb8b-0f1c-4e82-b721-ce16312bb822
+            region: first
+            configuration:
+              id: 'field_block:taxonomy_term:flora_simple_category:field_category_image'
+              label: 'Category Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: large_1920w
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+          d01c6d55-2b65-4cd7-9f58-313c84e5b813:
+            uuid: d01c6d55-2b65-4cd7-9f58-313c84e5b813
+            region: second
+            configuration:
+              id: 'field_block:taxonomy_term:flora_simple_category:field_category_image'
+              label: 'Category Image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: image
+                settings:
+                  image_style: crop_thumbnail
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+id: taxonomy_term.flora_simple_category.default
+targetEntityType: taxonomy_term
+bundle: flora_simple_category
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_category_image:
+    weight: 1
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden: {  }

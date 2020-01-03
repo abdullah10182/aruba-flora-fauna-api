@@ -1,0 +1,57 @@
+uuid: 6709f614-c6f9-439b-b47c-7a142aa416d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.flora_simple_category.field_category_image
+    - image.style.thumbnail
+    - taxonomy.vocabulary.flora_simple_category
+  module:
+    - image_widget_crop
+    - text
+id: taxonomy_term.flora_simple_category.default
+targetEntityType: taxonomy_term
+bundle: flora_simple_category
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_category_image:
+    weight: 2
+    settings:
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: thumbnail
+      crop_preview_image_style: large_1920w
+      progress_indicator: bar
+      crop_list:
+        - thumbnail_crop
+      crop_types_required:
+        - thumbnail_crop
+      show_crop_area: false
+    third_party_settings: {  }
+    type: image_widget_crop
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 3
+    region: content
+    third_party_settings: {  }
+hidden:
+  path: true

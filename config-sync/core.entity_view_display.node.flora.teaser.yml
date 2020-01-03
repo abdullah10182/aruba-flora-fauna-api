@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.flora.field_papiamento_name
     - field.field.node.flora.field_protected_locally
     - field.field.node.flora.field_scientific_name
+    - field.field.node.flora.field_status
     - node.type.flora
   module:
     - user
@@ -38,3 +39,4 @@ hidden:
   field_papiamento_name: true
   field_protected_locally: true
   field_scientific_name: true
+  field_status: true

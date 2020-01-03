@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.flora.field_papiamento_name
     - field.field.node.flora.field_protected_locally
     - field.field.node.flora.field_scientific_name
+    - field.field.node.flora.field_status
     - image.style.large
     - node.type.flora
   module:
@@ -121,4 +122,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_status: true
   layout_builder__layout: true
