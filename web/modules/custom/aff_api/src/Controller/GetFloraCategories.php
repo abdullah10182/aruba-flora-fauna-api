@@ -67,14 +67,14 @@ class GetFloraCategories extends ControllerBase {
 
   public function createImageObject($image_field) {
     $main_image = new \stdClass();
-    $main_image->main_image_large = null;
-    $main_image->main_image_thumbnail = null;
-    $main_image->title = null;
+    $main_image->image_large = null;
+    $main_image->image_thumbnail = null;
+    $main_image->image_title = null;
     $image_field_array = $image_field->getValue();
     if(count($image_field_array) > 0){      
-      $main_image->main_image_large = ImageStyle::load('large_1920w')->buildUrl($image_field->entity->getFileUri());
-      $main_image->main_image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($image_field->entity->getFileUri());
-      $main_image->title = $image_field->title;
+      $main_image->image_large = ImageStyle::load('large_1920w')->buildUrl($image_field->entity->getFileUri());
+      $main_image->image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($image_field->entity->getFileUri());
+      $main_image->image_title = $image_field->title;
     }
     
     return $main_image;
