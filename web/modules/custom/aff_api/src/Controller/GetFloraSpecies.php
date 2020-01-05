@@ -41,8 +41,8 @@ class GetFloraSpecies extends ControllerBase {
         $protected_locally = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_protected_locally->target_id);
       if(isset($plant->field_category->target_id))
         $category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
-      if(isset($plant->field_category->target_id))
-        $family = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
+      if(isset($plant->field_family->target_id))
+        $family = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_family->target_id);
 
       $main_image = $this->createImageObject($plant->field_main_image);
       $additional_images = $this->createMainAdditionalImagesObject($plant);
