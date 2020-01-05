@@ -50,7 +50,7 @@ class GetFloraSpecies extends ControllerBase {
       $response_array[] = [
         'id' => $plant->nid->value,
         'common_name' => $plant->title->value,
-        'papiamento_name' => $plant->field_papiamento_name->value ? $plant->field_papiamento_name->value : '',
+        'papiamento_name' => $plant->field_papiamento_name->value,
         'scientific_name' => $plant->field_scientific_name->value,
         'protected_locally' => $protected_locally ? true : false,
         'category_id' => $plant->field_category->target_id,
