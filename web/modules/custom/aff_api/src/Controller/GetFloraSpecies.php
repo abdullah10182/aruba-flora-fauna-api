@@ -52,7 +52,7 @@ class GetFloraSpecies extends ControllerBase {
         'common_name' => $plant->title->value,
         'papiamento_name' => $plant->field_papiamento_name->value,
         'scientific_name' => $plant->field_scientific_name->value,
-        'protected_localy' => $protected_locally ? true : false,
+        'protected_locally' => $protected_locally ? true : false,
         'category_id' => $plant->field_category->target_id,
         'category_name' => $category ? $category->getName() : null,
         'family' => $family ? $family->getName() : null,
