@@ -6,6 +6,13 @@ aff_api.get_flora_species:
   requirements:
     _access: 'TRUE'
 
+aff_api.get_flora_species_search_suggestions:
+  path: 'aff-api/flora-species-search-suggestions'
+  defaults: { _controller: '\Drupal\aff_api\Controller\GetFloraSpecies::get_flora_species_search_suggestions' }
+  methods:  [GET]
+  requirements:
+    _access: 'TRUE'
+
 aff_api.get_flora_categories:
   path: 'aff-api/flora-categories'
   defaults: { _controller: '\Drupal\aff_api\Controller\GetFloraCategories::get_flora_categories' }

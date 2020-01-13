@@ -72,6 +72,30 @@ class GetFloraSpecies extends ControllerBase {
     return $response;
   }
 
+  public function get_flora_species_search_suggestions( Request $request ) {
+    //query function 
+    $species = $this->query_flora_species($request);
+    $response_array = array();
+
+    foreach ($species['data'] as $plant) {
+      $main_image = $this->createImageObject($plant->field_main_image);
+      $additional_images = $this->createMainAdditionalImagesObject($plant);
+
+      $response_array[] = [
+        'id' => $plant->nid->value,
+        'common_name' => $plant->title->value,
+        'papiamento_name' => $plant->field_papiamento_name->value
+      ];
+    }
+
+    $response_full['species'] =$response_array;
+    $response_full['count'] = $species['count'];
+
+    $response = new Response(json_encode($response_full));
+    $response->headers->set('Content-Type', 'application/json');
+    return $response;
+  }
+
   public function query_flora_species($request) {
     $species = [];
     $query = \Drupal::entityQuery('node')
