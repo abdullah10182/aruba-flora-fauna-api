@@ -37,12 +37,15 @@ class GetFloraSpecies extends ControllerBase {
       $protected_locally = null;
       $category = null;
       $family = null;
+      $status = null;
       if(isset($plant->field_protected_locally->target_id))
         $protected_locally = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_protected_locally->target_id);
       if(isset($plant->field_category->target_id))
         $category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
       if(isset($plant->field_family->target_id))
         $family = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_family->target_id);
+      if(isset($plant->field_status->target_id))
+        $status = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_status->target_id);
 
       $main_image = $this->createImageObject($plant->field_main_image);
       $additional_images = $this->createMainAdditionalImagesObject($plant);
@@ -55,6 +58,8 @@ class GetFloraSpecies extends ControllerBase {
         'protected_locally' => $protected_locally ? true : false,
         'category_id' => $plant->field_category->target_id,
         'category_name' => $category ? $category->getName() : null,
+        'status_id' => $plant->field_status->target_id,
+        'status_name' => $status ? $status->getName() : null,
         'family' => $family ? $family->getName() : null,
         'short_description' => $plant->field_description_short->value,
         'description' => $plant->field_description->value,
