@@ -1,0 +1,15 @@
+uuid: 3a78c84e-6594-4c0a-983d-2d4b87cfc280
+langcode: en
+status: true
+dependencies: {  }
+name: medium_960_x_auto
+label: 'Medium (960 x auto)'
+effects:
+  22099ed0-f62f-4fe9-b7f8-887b73d638a4:
+    uuid: 22099ed0-f62f-4fe9-b7f8-887b73d638a4
+    id: image_scale
+    weight: 2
+    data:
+      width: 960
+      height: null
+      upscale: false
