@@ -121,8 +121,9 @@ class GetFloraSpecies extends ControllerBase {
   public function createImageObject($image_field) {
     $main_image = new \stdClass();
     $main_image->image_large = ImageStyle::load('large_1920w')->buildUrl($image_field->entity->getFileUri());
-    $main_image->image_medium = ImageStyle::load('medium_960_x_720')->buildUrl($image_field->entity->getFileUri());
+    $main_image->image_medium = ImageStyle::load('medium_960_x_auto')->buildUrl($image_field->entity->getFileUri());
     $main_image->image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($image_field->entity->getFileUri());
+    $main_image->image_small = ImageStyle::load('small')->buildUrl($image_field->entity->getFileUri());
     $main_image->image_title = $image_field->title;
     return $main_image;
   }
@@ -138,8 +139,9 @@ class GetFloraSpecies extends ControllerBase {
       $file = \Drupal\file\Entity\File::load($plant_value['target_id']);
       $additional_image = new \stdClass();
       $additional_image->image_large = ImageStyle::load('large_1920w')->buildUrl($file->getFileUri());
-      $additional_image->image_medium = ImageStyle::load('medium_960_x_720')->buildUrl($file->getFileUri());
+      $additional_image->image_medium = ImageStyle::load('medium_960_x_auto')->buildUrl($file->getFileUri());
       $additional_image->image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($file->getFileUri());
+      $additional_image->image_small = ImageStyle::load('small')->buildUrl($file->getFileUri());
       $additional_image->image_title = $plant_value['title'];
       array_push($additional_images, $additional_image);
     }
