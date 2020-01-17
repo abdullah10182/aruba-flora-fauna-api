@@ -107,9 +107,10 @@ class GetFloraSpecies extends ControllerBase {
     ->condition('type','flora')
     ->condition('status',1)
     ->sort('title' , 'ASC');
-    $test = $request->get('category') ;
     if($request->get('category') !== null)
       $query = $query->condition('field_category', $request->get('category'), '=');
+    if($request->get('species_id') !== null)
+      $query = $query->condition('nid', $request->get('species_id'), '=');
     //$count = $query->count()->execute();
     $ids = $query->execute();
     $species['count'] = count($ids);  
