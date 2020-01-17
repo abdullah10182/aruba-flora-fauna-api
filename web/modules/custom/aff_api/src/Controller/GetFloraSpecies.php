@@ -111,8 +111,21 @@ class GetFloraSpecies extends ControllerBase {
       $query = $query->condition('field_category', $request->get('category'), '=');
     if($request->get('species_id') !== null)
       $query = $query->condition('nid', $request->get('species_id'), '=');
+    if($request->get('q') !== null) {
+      $q = $request->get('q');
+      $group = $query->orConditionGroup()
+        ->condition('title', $q, 'CONTAINS')
+        ->condition('field_scientific_name', $q, 'CONTAINS')
+        ->condition('field_description_short', $q, 'CONTAINS')
+        ->condition('field_status.entity.name', $q, 'CONTAINS')
+        ->condition('field_category.entity.name', $q, 'CONTAINS')
+        ->condition('field_family.entity.name', $q, 'CONTAINS')
+        ->condition('field_papiamento_name', $q, 'CONTAINS');
+        $ids = $query->condition($group)->execute();
+    } else {
+      $ids = $query->execute();
+    }
     //$count = $query->count()->execute();
-    $ids = $query->execute();
     $species['count'] = count($ids);  
     $species['data'] = \Drupal\node\Entity\Node::loadMultiple($ids);  
   
