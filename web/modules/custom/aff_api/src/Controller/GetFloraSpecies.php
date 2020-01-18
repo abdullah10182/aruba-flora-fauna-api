@@ -85,11 +85,16 @@ class GetFloraSpecies extends ControllerBase {
     foreach ($species['data'] as $plant) {
       $main_image = $this->createImageObject($plant->field_main_image);
       $additional_images = $this->createMainAdditionalImagesObject($plant);
+      $category = null;
+
+      if(isset($plant->field_category->target_id))
+        $category = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($plant->field_category->target_id);
 
       $response_array[] = [
         'id' => $plant->nid->value,
         'common_name' => $plant->title->value,
-        'papiamento_name' => $plant->field_papiamento_name->value
+        'papiamento_name' => $plant->field_papiamento_name->value,
+        'category_name' => $category ? $category->getName() : null
       ];
     }
 
@@ -105,8 +110,11 @@ class GetFloraSpecies extends ControllerBase {
     $species = [];
     $query = \Drupal::entityQuery('node')
     ->condition('type','flora')
-    ->condition('status',1)
-    ->sort('title' , 'ASC');
+    ->condition('status',1);
+    if($request->get('sort_by'))
+      $query->sort($request->get('sort_by'), 'DESC');
+    else
+      $query->sort('title' , 'ASC');
     if($request->get('category') !== null)
       $query = $query->condition('field_category', $request->get('category'), '=');
     if($request->get('species_id') !== null)
@@ -134,11 +142,13 @@ class GetFloraSpecies extends ControllerBase {
 
   public function createImageObject($image_field) {
     $main_image = new \stdClass();
-    $main_image->image_large = ImageStyle::load('large_1920w')->buildUrl($image_field->entity->getFileUri());
-    $main_image->image_medium = ImageStyle::load('medium_960_x_auto')->buildUrl($image_field->entity->getFileUri());
-    $main_image->image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($image_field->entity->getFileUri());
-    $main_image->image_small = ImageStyle::load('small')->buildUrl($image_field->entity->getFileUri());
-    $main_image->image_title = $image_field->title;
+    if($image_field->getValue()) {      
+      $main_image->image_large = ImageStyle::load('large_1920w')->buildUrl($image_field->entity->getFileUri());
+      $main_image->image_medium = ImageStyle::load('medium_960_x_auto')->buildUrl($image_field->entity->getFileUri());
+      $main_image->image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($image_field->entity->getFileUri());
+      $main_image->image_small = ImageStyle::load('small')->buildUrl($image_field->entity->getFileUri());
+      $main_image->image_title = $image_field->title;
+    }
     return $main_image;
   }
 
@@ -151,7 +161,7 @@ class GetFloraSpecies extends ControllerBase {
 
     foreach ($additional_images_fields as $key => $plant_value) {
       $file = \Drupal\file\Entity\File::load($plant_value['target_id']);
-      $additional_image = new \stdClass();
+      $additional_image = new \stdClass(); 
       $additional_image->image_large = ImageStyle::load('large_1920w')->buildUrl($file->getFileUri());
       $additional_image->image_medium = ImageStyle::load('medium_960_x_auto')->buildUrl($file->getFileUri());
       $additional_image->image_thumbnail = ImageStyle::load('crop_thumbnail')->buildUrl($file->getFileUri());
