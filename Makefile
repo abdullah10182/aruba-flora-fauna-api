@@ -10,3 +10,6 @@ test:
 
 dcu:
 	docker-compose up -d
+
+dcd:
+	docker-compose down
