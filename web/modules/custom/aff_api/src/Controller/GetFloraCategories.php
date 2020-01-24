@@ -55,7 +55,7 @@ class GetFloraCategories extends ControllerBase {
   public function query_flora_categories($request) {
     $query = \Drupal::entityQuery('taxonomy_term')
       ->condition('status',1)
-      ->sort('name' , 'ASC')
+      ->sort('name' , 'DESC')
       ->condition('vid', 'flora_simple_category');
     $ids = $query->execute();
     $categories = [];
