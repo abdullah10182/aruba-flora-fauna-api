@@ -115,7 +115,7 @@ class GetFloraSpecies extends ControllerBase {
       $query->sort($request->get('sort_by'), 'DESC');
     else
       $query->sort('title' , 'ASC');
-    if($request->get('category') !== null)
+    if($request->get('category') !== null && $request->get('category') !== 'all')
       $query = $query->condition('field_category', $request->get('category'), '=');
     if($request->get('species_id') !== null)
       $query = $query->condition('nid', $request->get('species_id'), '=');
