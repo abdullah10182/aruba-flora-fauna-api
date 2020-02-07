@@ -1,6 +1,16 @@
 make drush "sql:dump --result-file=../mariadb-init/sqldump.sql"
 make drush "cex -y"
 
+# php memory issue
+COMPOSER_MEMORY_LIMIT=-1 composer update drupal/<module_name>
+https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
+
+# updating
+COMPOSER_MEMORY_LIMIT=-1 composer update --with-dependencies
+# rerun docker-sync container
+make drush updb
+make drush cr
+
 Spiecies Fields
 - Title / Common name
 - Papiamento name
