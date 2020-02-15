@@ -1,6 +1,9 @@
 make drush "sql:dump --result-file=../mariadb-init/sqldump.sql"
 make drush "cex -y"
 
+http://pma.drupal.docker.localhost:8000/
+http://mailhog.drupal.docker.localhost:8000
+
 # php memory issue
 COMPOSER_MEMORY_LIMIT=-1 composer update drupal/<module_name>
 https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
@@ -10,27 +13,3 @@ COMPOSER_MEMORY_LIMIT=-1 composer update --with-dependencies
 # rerun docker-sync container
 make drush updb
 make drush cr
-
-Spiecies Fields
-- Title / Common name
-- Papiamento name
-- Scientific/ latin name
-- Category: 
-    - Succelent plants
-    - Shrubs/small trees
-    - Herbs
-    - Grasses
-    - Vines
-    - Mangroves
-    - Terrestial trees
-- Family:
-- Description
-- Link
-- Protected Locally
-- Status:
-    - Introduced/ Exotic
-    - Invasive
-    - Native
-    - Endemic Aruba
-    - Endemic ABC islands
-- One more?? cant remember

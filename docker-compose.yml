@@ -30,7 +30,7 @@ services:
       PHP_FPM_GROUP: wodby
       COLUMNS: 80 # Set 80 columns for docker exec -it.
 ## Read instructions at https://wodby.com/docs/stacks/php/local/#xdebug
-      PHP_XDEBUG: 1
+      #PHP_XDEBUG: 1 #toggle this for xdebug
       PHP_XDEBUG_DEFAULT_ENABLE: 1
       PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
       PHP_IDE_CONFIG: serverName=my-ide
@@ -49,7 +49,7 @@ services:
       #- ./:/var/www/html
 ## For macOS users (https://wodby.com/docs/stacks/drupal/local#docker-for-mac)
       #- ./:/var/www/html:cached # User-guided caching
-      - docker-sync:/var/www/html # Docker-sync
+      - docker-sync-aff:/var/www/html # Docker-sync
 ## For XHProf and Xdebug profiler traces
 #      - files:/mnt/files
 
@@ -69,7 +69,7 @@ services:
       #- ./:/var/www/html
 # For macOS users (https://wodby.com/docs/stacks/drupal/local#docker-for-mac)
       #- ./:/var/www/html:cached # User-guided caching
-      - docker-sync:/var/www/html # Docker-sync
+      - docker-sync-aff:/var/www/html # Docker-sync
     labels:
       - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
 
@@ -284,7 +284,7 @@ services:
 
 volumes:
 ## Docker-sync for macOS users
-  docker-sync:
+  docker-sync-aff:
     external: true
 ## For Xdebug profiler
 #  files:
