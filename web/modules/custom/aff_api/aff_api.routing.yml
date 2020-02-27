@@ -19,3 +19,10 @@ aff_api.get_flora_categories:
   methods:  [GET]
   requirements:
     _access: 'TRUE'
+
+aff_api.get_about_page:
+  path: 'aff-api/about-page'
+  defaults: { _controller: '\Drupal\aff_api\Controller\GetAboutPage::get_about_page' }
+  methods:  [GET]
+  requirements:
+    _access: 'TRUE'
